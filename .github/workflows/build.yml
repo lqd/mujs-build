@@ -1,0 +1,137 @@
+name: build
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+jobs:
+  build-macos-aarch64:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install
+        run: |
+          git clone https://github.com/ccxvii/mujs.git
+      - name: build
+        run: |
+          cd mujs
+          make release HAVE_READLINE=no
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: mujs-aarch64-apple-darwin
+          path: ./mujs/release/*
+  build-macos-x86_64:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v4
+      - name: install
+        run: |
+          git clone https://github.com/ccxvii/mujs.git
+      - name: build
+        run: |
+          cd mujs
+          make release HAVE_READLINE=no
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: mujs-x86_64-apple-darwin
+          path: ./mujs/release/*
+  build-ubuntu:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: install
+        run: |
+          git clone https://github.com/ccxvii/mujs.git
+      - name: build
+        run: |
+          cd mujs
+          make release HAVE_READLINE=no
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: mujs-x86_64-unknown-linux-gnu
+          path: ./mujs/release/*
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          path-type: inherit
+          install: >-
+            mingw-w64-x86_64-make
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-clang
+            mingw-w64-x86_64-perl
+            mingw-w64-x86_64-python3
+            zip
+            unzip
+            curl
+            wget
+      - name: install
+        shell: msys2 {0}
+        run: |
+          git clone https://github.com/ccxvii/mujs.git
+      - name: build
+        shell: msys2 {0}
+        run: |
+          cd mujs
+          make release HAVE_READLINE=no
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: mujs-x86_64-pc-windows-gnu
+          path: ./mujs/release/*
+
+  update:
+    needs:
+      [
+        "build-ubuntu",
+        "build-windows",
+        "build-macos-x86_64",
+        "build-macos-aarch64",
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: mujs-aarch64-apple-darwin
+          pattern: mujs-aarch64-apple-darwin
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          path: ubuntu
+          pattern: jsc-ubuntu
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          path: mujs-x86_64-apple-darwin
+          pattern: mujs-x86_64-apple-darwin
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          path: mujs-x86_64-unknown-linux-gnu
+          pattern: mujs-x86_64-unknown-linux-gnu
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          path: mujs-x86_64-pc-windows-gnu
+          pattern: mujs-x86_64-pc-windows-gnu
+          merge-multiple: true
+
+      - name: release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "*.zip"
