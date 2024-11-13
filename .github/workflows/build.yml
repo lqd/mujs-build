@@ -23,11 +23,13 @@ jobs:
         run: |
           cd mujs
           make release HAVE_READLINE=no
+          tar -czf ./mujs-aarch64-apple-darwin.tar.gz -C ./build/release .
+
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: mujs-aarch64-apple-darwin
-          path: ./mujs/build/release/*
+          path: ./mujs/mujs-aarch64-apple-darwin.tar.gz
   build-macos-x86_64:
     runs-on: macos-13
     steps:
@@ -39,11 +41,12 @@ jobs:
         run: |
           cd mujs
           make release HAVE_READLINE=no
+          tar -czf ./mujs-x86_64-apple-darwin.tar.gz -C ./build/release .
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-apple-darwin
-          path: ./mujs/build/release/*
+          path: ./mujs/mujs-x86_64-apple-darwin.tar.gz
   build-ubuntu:
     runs-on: ubuntu-24.04
     steps:
@@ -55,11 +58,12 @@ jobs:
         run: |
           cd mujs
           make release HAVE_READLINE=no
+          tar -czf ./mujs-x86_64-unknown-linux-gnu.tar.gz -C ./build/release .
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-unknown-linux-gnu
-          path: ./mujs/build/release/*
+          path: ./mujs/mujs-x86_64-unknown-linux-gnu.tar.gz
   build-windows:
     runs-on: windows-latest
     steps:
@@ -89,11 +93,12 @@ jobs:
         run: |
           cd mujs
           make release HAVE_READLINE=no
+          tar -czf ./mujs-x86_64-pc-windows-gnu.tar.gz -C ./build/release .
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-pc-windows-gnu
-          path: ./mujs/build/release/*
+          path: ./mujs/mujs-x86_64-pc-windows-gnu.tar.gz
 
   build:
     needs:
@@ -106,27 +111,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download artifact
-        id: download-artifact
-        uses: dawidd6/action-download-artifact@v6
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
         with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          run_number: 34
-          # Optional, uploaded artifact name,
-          # will download all artifacts if not specified
-          # and extract them into respective subdirectories
-          # https://github.com/actions/download-artifact#download-all-artifacts
-          # is treated as a regular expression if input name_is_regexp is true
-          # will download only those artifacts with a name that matches this regular expression
-          # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
-          name: mujs-*
-          name_is_regexp: true
-          # Optional, a directory where to extract artifact(s), defaults to the current directory
-          path: dist
-          skip_unpack: true
+          path: mujs
+          pattern: mujs-*
+          merge-multiple: true
 
       - name: release
         if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/*.zip"
+          artifacts: "mujs/*.tar.gz"
