@@ -25,7 +25,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mujs-aarch64-apple-darwin
-          path: ./mujs/release/*
+          path: ./mujs/build/release/*
   build-macos-x86_64:
     runs-on: macos-13
     steps:
@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-apple-darwin
-          path: ./mujs/release/*
+          path: ./mujs/build/release/*
   build-ubuntu:
     runs-on: ubuntu-24.04
     steps:
@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-unknown-linux-gnu
-          path: ./mujs/release/*
+          path: ./mujs/build/release/*
   build-windows:
     runs-on: windows-latest
     steps:
@@ -91,7 +91,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-pc-windows-gnu
-          path: ./mujs/release/*
+          path: ./mujs/build/release/*
 
   build:
     needs:
