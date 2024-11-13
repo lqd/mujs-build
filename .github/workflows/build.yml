@@ -93,7 +93,7 @@ jobs:
           name: mujs-x86_64-pc-windows-gnu
           path: ./mujs/release/*
 
-  update:
+  build:
     needs:
       [
         "build-ubuntu",
