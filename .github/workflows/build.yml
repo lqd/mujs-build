@@ -106,34 +106,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v6
         with:
-          path: mujs-aarch64-apple-darwin
-          pattern: mujs-aarch64-apple-darwin
-          merge-multiple: true
-      - uses: actions/download-artifact@v4
-        with:
-          path: ubuntu
-          pattern: jsc-ubuntu
-          merge-multiple: true
-      - uses: actions/download-artifact@v4
-        with:
-          path: mujs-x86_64-apple-darwin
-          pattern: mujs-x86_64-apple-darwin
-          merge-multiple: true
-      - uses: actions/download-artifact@v4
-        with:
-          path: mujs-x86_64-unknown-linux-gnu
-          pattern: mujs-x86_64-unknown-linux-gnu
-          merge-multiple: true
-      - uses: actions/download-artifact@v4
-        with:
-          path: mujs-x86_64-pc-windows-gnu
-          pattern: mujs-x86_64-pc-windows-gnu
-          merge-multiple: true
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          run_number: 34
+          # Optional, uploaded artifact name,
+          # will download all artifacts if not specified
+          # and extract them into respective subdirectories
+          # https://github.com/actions/download-artifact#download-all-artifacts
+          # is treated as a regular expression if input name_is_regexp is true
+          # will download only those artifacts with a name that matches this regular expression
+          # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
+          name: mujs-*
+          name_is_regexp: true
+          # Optional, a directory where to extract artifact(s), defaults to the current directory
+          path: dist
+          skip_unpack: true
 
       - name: release
         if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "*.zip"
+          artifacts: "dist/*.zip"
