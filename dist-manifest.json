@@ -1,0 +1,146 @@
+{
+  "artifacts": {
+    "mujs-aarch64-apple-darwin.tar.gz": {
+      "name": "mujs-aarch64-apple-darwin.tar.gz",
+      "target_triples": [
+        "aarch64-apple-darwin"
+      ],
+      "assets": [
+        {
+          "name": "mujs",
+          "path": "mujs",
+          "kind": "executable"
+        },
+        {
+          "name": "mujs-pp",
+          "path": "mujs-pp",
+          "kind": "executable"
+        },
+        {
+          "name": "libmujs.dylib",
+          "path": "libmujs.dylib",
+          "kind": "c_dynamic_library"
+        },
+        {
+          "name": "libmujs.a",
+          "path": "libmujs.a",
+          "kind": "c_static_library"
+        }
+      ]
+    },
+    "mujs-aarch64-unknown-linux-gnu.tar.gz": {
+      "name": "mujs-aarch64-unknown-linux-gnu.tar.gz",
+      "target_triples": [
+        "aarch64-unknown-linux-gnu"
+      ],
+      "assets": [
+        {
+          "name": "mujs",
+          "path": "mujs",
+          "kind": "executable"
+        },
+        {
+          "name": "mujs-pp",
+          "path": "mujs-pp",
+          "kind": "executable"
+        },
+        {
+          "name": "libmujs.so",
+          "path": "libmujs.so",
+          "kind": "c_dynamic_library"
+        },
+        {
+          "name": "libmujs.a",
+          "path": "libmujs.a",
+          "kind": "c_static_library"
+        }
+      ]
+    },
+    "mujs-x86_64-apple-darwin.tar.gz": {
+      "name": "mujs-x86_64-apple-darwin.tar.gz",
+      "kind": "executable-zip",
+      "target_triples": [
+        "x86_64-apple-darwin"
+      ],
+      "assets": [
+        {
+          "name": "mujs",
+          "path": "mujs",
+          "kind": "executable"
+        },
+        {
+          "name": "mujs-pp",
+          "path": "mujs-pp",
+          "kind": "executable"
+        },
+        {
+          "name": "libmujs.dylib",
+          "path": "libmujs.dylib",
+          "kind": "c_dynamic_library"
+        },
+        {
+          "name": "libmujs.a",
+          "path": "libmujs.a",
+          "kind": "c_static_library"
+        }
+      ]
+    },
+    "mujs-x86_64-pc-windows-msvc.zip": {
+      "name": "mujs-x86_64-pc-windows-msvc.zip",
+      "kind": "executable-zip",
+      "target_triples": [
+        "x86_64-pc-windows-msvc"
+      ],
+      "assets": [
+        {
+          "name": "mujs.exe",
+          "path": "mujs.exe",
+          "kind": "executable"
+        },
+        {
+          "name": "mujs-pp.exe",
+          "path": "mujs-pp.exe",
+          "kind": "executable"
+        },
+        {
+          "name": "libmujs.so",
+          "path": "libmujs.so",
+          "kind": "c_dynamic_library"
+        },
+        {
+          "name": "libmujs.a",
+          "path": "libmujs.a",
+          "kind": "c_static_library"
+        }
+      ]
+    },
+    "mujs-x86_64-unknown-linux-gnu.tar.gz": {
+      "name": "mujs-x86_64-unknown-linux-gnu.tar.gz",
+      "target_triples": [
+        "x86_64-unknown-linux-gnu"
+      ],
+      "assets": [
+        {
+          "name": "mujs",
+          "path": "mujs",
+          "kind": "executable"
+        },
+        {
+          "name": "mujs-pp",
+          "path": "mujs-pp",
+          "kind": "executable"
+        },
+        {
+          "name": "libmujs.so",
+          "path": "libmujs.so",
+          "kind": "c_dynamic_library"
+        },
+        {
+          "name": "libmujs.a",
+          "path": "libmujs.a",
+          "kind": "c_static_library"
+        }
+      ]
+    }
+  }
+}

@@ -23,13 +23,13 @@ jobs:
         run: |
           cd mujs
           make release HAVE_READLINE=no
-          tar -czf ./mujs-aarch64-apple-darwin.tar.gz -C ./build/release .
+          tar -cJf ./mujs-aarch64-apple-darwin.tar.xz -C ./build/release .
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: mujs-aarch64-apple-darwin
-          path: ./mujs/mujs-aarch64-apple-darwin.tar.gz
+          path: ./mujs/mujs-aarch64-apple-darwin.tar.xz
   build-macos-x86_64:
     runs-on: macos-13
     steps:
@@ -41,12 +41,12 @@ jobs:
         run: |
           cd mujs
           make release HAVE_READLINE=no
-          tar -czf ./mujs-x86_64-apple-darwin.tar.gz -C ./build/release .
+          tar -cJf ./mujs-x86_64-apple-darwin.tar.xz -C ./build/release .
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-apple-darwin
-          path: ./mujs/mujs-x86_64-apple-darwin.tar.gz
+          path: ./mujs/mujs-x86_64-apple-darwin.tar.xz
   build-ubuntu:
     runs-on: ubuntu-24.04
     steps:
@@ -58,12 +58,12 @@ jobs:
         run: |
           cd mujs
           make release HAVE_READLINE=no
-          tar -czf ./mujs-x86_64-unknown-linux-gnu.tar.gz -C ./build/release .
+          tar -cJf ./mujs-x86_64-unknown-linux-gnu.tar.xz -C ./build/release .
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-unknown-linux-gnu
-          path: ./mujs/mujs-x86_64-unknown-linux-gnu.tar.gz
+          path: ./mujs/mujs-x86_64-unknown-linux-gnu.tar.xz
   build-windows:
     runs-on: windows-latest
     steps:
@@ -93,12 +93,12 @@ jobs:
         run: |
           cd mujs
           make release HAVE_READLINE=no
-          tar -czf ./mujs-x86_64-pc-windows-gnu.tar.gz -C ./build/release .
+          tar -cJf ./mujs-x86_64-pc-windows-gnu.tar.xz -C ./build/release .
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: mujs-x86_64-pc-windows-gnu
-          path: ./mujs/mujs-x86_64-pc-windows-gnu.tar.gz
+          path: ./mujs/mujs-x86_64-pc-windows-gnu.tar.xz
 
   build:
     needs:
@@ -122,4 +122,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "mujs/*.tar.gz"
+          artifacts: "mujs/*.tar.xz,dist-manifest.json"
