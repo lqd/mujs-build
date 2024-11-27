@@ -1,7 +1,7 @@
 {
   "artifacts": {
-    "mujs-aarch64-apple-darwin.tar.gz": {
-      "name": "mujs-aarch64-apple-darwin.tar.gz",
+    "mujs-aarch64-apple-darwin.tar.xz": {
+      "name": "mujs-aarch64-apple-darwin.tar.xz",
       "target_triples": [
         "aarch64-apple-darwin"
       ],
@@ -28,8 +28,8 @@
         }
       ]
     },
-    "mujs-aarch64-unknown-linux-gnu.tar.gz": {
-      "name": "mujs-aarch64-unknown-linux-gnu.tar.gz",
+    "mujs-aarch64-unknown-linux-gnu.tar.xz": {
+      "name": "mujs-aarch64-unknown-linux-gnu.tar.xz",
       "target_triples": [
         "aarch64-unknown-linux-gnu"
       ],
@@ -56,8 +56,8 @@
         }
       ]
     },
-    "mujs-x86_64-apple-darwin.tar.gz": {
-      "name": "mujs-x86_64-apple-darwin.tar.gz",
+    "mujs-x86_64-apple-darwin.tar.xz": {
+      "name": "mujs-x86_64-apple-darwin.tar.xz",
       "kind": "executable-zip",
       "target_triples": [
         "x86_64-apple-darwin"
@@ -114,8 +114,8 @@
         }
       ]
     },
-    "mujs-x86_64-unknown-linux-gnu.tar.gz": {
-      "name": "mujs-x86_64-unknown-linux-gnu.tar.gz",
+    "mujs-x86_64-unknown-linux-gnu.tar.xz": {
+      "name": "mujs-x86_64-unknown-linux-gnu.tar.xz",
       "target_triples": [
         "x86_64-unknown-linux-gnu"
       ],
