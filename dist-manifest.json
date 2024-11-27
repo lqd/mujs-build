@@ -85,11 +85,11 @@
         }
       ]
     },
-    "mujs-x86_64-pc-windows-msvc.zip": {
-      "name": "mujs-x86_64-pc-windows-msvc.zip",
+    "mujs-x86_64-pc-windows-gnu.zip": {
+      "name": "mujs-x86_64-pc-windows-gnu.zip",
       "kind": "executable-zip",
       "target_triples": [
-        "x86_64-pc-windows-msvc"
+        "x86_64-pc-windows-gnu"
       ],
       "assets": [
         {
