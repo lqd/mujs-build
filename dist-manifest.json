@@ -58,7 +58,6 @@
     },
     "mujs-x86_64-apple-darwin.tar.xz": {
       "name": "mujs-x86_64-apple-darwin.tar.xz",
-      "kind": "executable-zip",
       "target_triples": [
         "x86_64-apple-darwin"
       ],
@@ -85,9 +84,8 @@
         }
       ]
     },
-    "mujs-x86_64-pc-windows-gnu.zip": {
-      "name": "mujs-x86_64-pc-windows-gnu.zip",
-      "kind": "executable-zip",
+    "mujs-x86_64-pc-windows-gnu.tar.xz": {
+      "name": "mujs-x86_64-pc-windows-gnu.tar.xz",
       "target_triples": [
         "x86_64-pc-windows-gnu"
       ],
