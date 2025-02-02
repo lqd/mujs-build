@@ -11,6 +11,13 @@ on:
       - "main"
   pull_request:
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -CeEuo pipefail {0}
+
 jobs:
   build-macos-aarch64:
     runs-on: macos-latest
@@ -123,3 +130,17 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "mujs/*.tar.xz,dist-manifest.json"
+  post-test:
+    needs: ["build"]
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, windows-latest, macos-latest, macos-13]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ahaoboy/easy-setup@v1
+        with:
+          repo: https://github.com/ahaoboy/mujs-build
+      - name: test
+        run: |
+          which mujs
