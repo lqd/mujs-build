@@ -144,3 +144,5 @@ jobs:
       - name: test
         run: |
           which mujs
+          echo "console.log(1+1)" >> ./test.js
+          mujs ./test.js
