@@ -55,7 +55,7 @@ jobs:
           name: mujs-x86_64-apple-darwin
           path: ./mujs/mujs-x86_64-apple-darwin.tar.xz
   build-ubuntu:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: install
@@ -134,7 +134,7 @@ jobs:
     needs: ["build"]
     strategy:
       matrix:
-        os: [ubuntu-24.04, windows-latest, macos-14, macos-13]
+        os: [ubuntu-22.04, windows-latest, macos-14, macos-13]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
